@@ -49,8 +49,8 @@ if gfwmode==1 then
  end
 end
  
-if nixio.fs.access("/etc/china_ssr.txt") then 
- ip_count = sys.exec("cat /etc/china_ssr.txt | wc -l")
+if nixio.fs.access("/etc/ignore-ips.china.conf") then 
+ ip_count = sys.exec("cat /etc/ignore-ips.china.conf | wc -l")
 end
 
 local icount=sys.exec("ps -w | grep ssr-reudp |grep -v grep| wc -l")

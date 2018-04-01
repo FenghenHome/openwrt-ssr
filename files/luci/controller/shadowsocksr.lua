@@ -74,22 +74,21 @@ if set == "gfw_data" then
   retstring ="-1"
  end
 elseif set == "ip_data" then
- refresh_cmd="wget -O- 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest'  2>/dev/null| awk -F\\| '/CN\\|ipv4/ { printf(\"%s/%d\\n\", $4, 32-log($5)/log(2)) }' > /tmp/china_ssr.txt"
+ refresh_cmd="wget --no-check-certificate -O /tmp/ignore-ips.china.conf https://raw.githubusercontent.com/LisonFan/china_ip_list/master/china_ip_list"
  sret=luci.sys.call(refresh_cmd)
- icount = luci.sys.exec("cat /tmp/china_ssr.txt | wc -l")
- if  sret== 0 and tonumber(icount)>1000 then
-  oldcount=luci.sys.exec("cat /etc/china_ssr.txt | wc -l")
+ icount = luci.sys.exec("cat /tmp/ignore-ips.china.conf | wc -l")
+ if sret== 0 and tonumber(icount)>1000 then
+  oldcount=luci.sys.exec("cat /etc/ignore-ips.china.conf | wc -l")
   if tonumber(icount) ~= tonumber(oldcount) then
-   luci.sys.exec("cp -f /tmp/china_ssr.txt /etc/china_ssr.txt")
+   luci.sys.exec("cp -f /tmp/ignore-ips.china.conf /etc/ignore-ips.china.conf")
    retstring=tostring(tonumber(icount))
   else
    retstring ="0"
   end
-
  else
   retstring ="-1"
  end
- luci.sys.exec("rm -f /tmp/china_ssr.txt ")
+ luci.sys.exec("rm -f /tmp/ignore-ips.china.conf ")
 else
   if nixio.fs.access("/usr/bin/wget-ssl") then
   refresh_cmd="wget --no-check-certificate -O - https://easylist-downloads.adblockplus.org/easylistchina+easylist.txt | grep ^\\|\\|[^\\*]*\\^$ | sed -e 's:||:address\\=\\/:' -e 's:\\^:/127\\.0\\.0\\.1:' > /tmp/ad.conf"

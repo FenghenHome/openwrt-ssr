@@ -200,7 +200,7 @@ GFW版本支持IP路由模式和GFW列表模式，需卸载原有的dnsmasq，�
    
    如要打开kcptun的日志，可以在kcptun参数栏填入"--nocomp --log /var/log/kcptun.log"，日志会保存在指定文件中
    
-   IP路由模式的数据文件为/etc/china_ssr.txt,包含国内所有IP网段，一般很少变动，无需更新，如要更新，请在“状态”页面更新
+   IP路由模式的数据文件为/etc/ignore-ips.china.conf,包含国内所有IP网段，一般很少变动，无需更新，如要更新，请在“状态”页面更新
    
    GFW列表模式的数据文件为/etc/dnsmasq.ssr/gfw_list.conf，包含所有被墙网站，如需更新，请在“状态”页面更新
    
