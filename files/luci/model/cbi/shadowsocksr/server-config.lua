@@ -6,6 +6,7 @@ local shadowsocksr = "shadowsocksr"
 local sid = arg[1]
 
 local encrypt_methods = {
+	"none",
 	"table",
 	"rc4",
 	"rc4-md5",
@@ -34,12 +35,24 @@ local protocol = {
 	"origin",
 	"verify_simple",
 	"verify_sha1",		
+	"auth_sha1",
+	"auth_sha1_v2",
+	"auth_sha1_v4",
+	"auth_aes128_sha1",
+	"auth_aes128_md5",
+	"auth_chain_a",
+	"auth_chain_b",
+	"auth_chain_c",
+	"auth_chain_d",
+	"auth_chain_e",
+	"auth_chain_f",
 }
 
 obfs = {
 	"plain",
 	"http_simple",
 	"http_post",
+	"tls_simple",	
 	"tls1.2_ticket_auth",
 }
 
@@ -90,6 +103,7 @@ o = s:option(ListValue, "protocol", translate("Protocol"))
 for _, v in ipairs(protocol) do o:value(v) end
 o.rmempty = false
 
+o = s:option(Value, "protocol_param", translate("Protocol param(optional)"))
 
 o = s:option(ListValue, "obfs", translate("Obfs"))
 for _, v in ipairs(obfs) do o:value(v) end

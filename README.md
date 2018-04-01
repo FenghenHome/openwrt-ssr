@@ -149,6 +149,7 @@ GFW版本支持IP路由模式和GFW列表模式，需卸载原有的dnsmasq，�
    password       | 字符串     | 服务端设置的密码
    encrypt_method | 字符串     | 加密方式, [详情参考][2]
    protocol       | 字符串     | 传输协议，默认"origin"[详情参考][3]
+   protocol_param | 字符串     | 协议插件参数 [详情参考][3]
    obfs           | 字符串     | 混淆插件，默认"plain" [详情参考][3]
    obfs_param     | 字符串     | 混淆插件参数 [详情参考][3]
    fast_open      | 布尔型     | TCP快速打开 [详情参考][3]
@@ -192,6 +193,7 @@ GFW版本支持IP路由模式和GFW列表模式，需卸载原有的dnsmasq，�
    password       | 字符串     | 服务端设置的密码
    encrypt_method | 字符串     | 加密方式, [详情参考][2]
    protocol       | 字符串     | 传输协议，默认"origin"[详情参考][3]
+   protocol_param | 字符串     | 协议插件参数 [详情参考][3]
    obfs           | 字符串     | 混淆插件，默认"plain" [详情参考][3]
    obfs_param     | 字符串     | 混淆插件参数 [详情参考][3]
    fast_open      | 布尔型     | TCP快速打开 [详情参考][3]
