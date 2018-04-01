@@ -44,8 +44,8 @@ end
 
 if gfwmode==1 then 
  gfw_count = tonumber(sys.exec("cat /etc/dnsmasq.ssr/gfw-domains.china.conf | wc -l"))/2
- if nixio.fs.access("/etc/dnsmasq.ssr/ad.conf") then
-  ad_count=tonumber(sys.exec("cat /etc/dnsmasq.ssr/ad.conf | wc -l"))
+ if nixio.fs.access("/etc/dnsmasq.ssr/adblock-domains.china.conf") then
+  ad_count=tonumber(sys.exec("cat /etc/dnsmasq.ssr/adblock-domains.china.conf | wc -l"))
  end
 end
  

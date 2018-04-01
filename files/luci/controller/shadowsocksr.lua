@@ -81,23 +81,18 @@ elseif set == "ip_data" then
  end
  luci.sys.exec("rm -f /tmp/ignore-ips.china.conf ")
 else
-  if nixio.fs.access("/usr/bin/wget-ssl") then
-  refresh_cmd="wget --no-check-certificate -O - https://easylist-downloads.adblockplus.org/easylistchina+easylist.txt | grep ^\\|\\|[^\\*]*\\^$ | sed -e 's:||:address\\=\\/:' -e 's:\\^:/127\\.0\\.0\\.1:' > /tmp/ad.conf"
- else
-  refresh_cmd="wget -O /tmp/ad.conf http://iytc.net/tools/ad.conf"
- end
- sret=luci.sys.call(refresh_cmd .. " 2>/dev/null")
- if sret== 0 then
-  icount = luci.sys.exec("cat /tmp/ad.conf | wc -l")
-  if tonumber(icount)>1000 then
-   if nixio.fs.access("/etc/dnsmasq.ssr/ad.conf") then
-    oldcount=luci.sys.exec("cat /etc/dnsmasq.ssr/ad.conf | wc -l")
+ refresh_cmd="wget --no-check-certificate -O /tmp/adblock-domains.china.conf https://raw.githubusercontent.com/FenghenHome/www.114rom.com/master/openwrt/adblock-domains.china.conf"
+ sret=luci.sys.call(refresh_cmd)
+ icount = luci.sys.exec("cat /tmp/adblock-domains.china.conf | wc -l")
+  if sret== 0 and tonumber(icount)>1000 then
+   if nixio.fs.access("/etc/dnsmasq.ssr/adblock-domains.china.conf") then
+    oldcount=luci.sys.exec("cat /etc/dnsmasq.ssr/adblock-domains.china.conf | wc -l")
    else
     oldcount=0
    end
    
    if tonumber(icount) ~= tonumber(oldcount) then
-    luci.sys.exec("cp -f /tmp/ad.conf /etc/dnsmasq.ssr/ad.conf")
+    luci.sys.exec("cp -f /tmp/adblock-domains.china.conf /etc/dnsmasq.ssr/adblock-domains.china.conf")
     retstring=tostring(math.ceil(tonumber(icount)))
     if oldcount==0 then
      luci.sys.call("/etc/init.d/dnsmasq restart")
@@ -108,10 +103,7 @@ else
   else
    retstring ="-1"  
   end
-  luci.sys.exec("rm -f /tmp/ad.conf ")
- else
-  retstring ="-1"
- end
+  luci.sys.exec("rm -f /tmp/adblock-domains.china.conf ")
 end	
 luci.http.prepare_content("application/json")
 luci.http.write_json({ ret=retstring ,retcount=icount})
