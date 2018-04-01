@@ -62,7 +62,7 @@ msgid "Protocol"
 msgstr "传输协议"
 
 msgid "Protocol param(optional)"
-msgstr "混淆参数（可选）"
+msgstr "协议参数（可选）"
 
 msgid "Obfs"
 msgstr "混淆插件"
