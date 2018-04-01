@@ -14,7 +14,7 @@ local ad_count=0
 local ip_count=0
 local gfwmode=0
 
-if nixio.fs.access("/etc/dnsmasq.ssr/gfw_list.conf") then
+if nixio.fs.access("/etc/dnsmasq.ssr/gfw-domains.china.conf") then
 gfwmode=1		
 end
 
@@ -43,7 +43,7 @@ else
 end
 
 if gfwmode==1 then 
- gfw_count = tonumber(sys.exec("cat /etc/dnsmasq.ssr/gfw_list.conf | wc -l"))/2
+ gfw_count = tonumber(sys.exec("cat /etc/dnsmasq.ssr/gfw-domains.china.conf | wc -l"))/2
  if nixio.fs.access("/etc/dnsmasq.ssr/ad.conf") then
   ad_count=tonumber(sys.exec("cat /etc/dnsmasq.ssr/ad.conf | wc -l"))
  end

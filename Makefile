@@ -233,10 +233,9 @@ define Package/luci-app-shadowsocksR-GFW/install
 	#$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/ss-check $(1)/usr/bin/ssr-check
 	$(INSTALL_BIN) ./files/shadowsocksr.rule $(1)/usr/bin/ssr-rules
 	$(INSTALL_BIN) ./files/shadowsocksr.monitor $(1)/usr/bin/ssr-monitor
-	$(INSTALL_BIN) ./files/shadowsocksr.gfw $(1)/usr/bin/ssr-gfw
 	$(INSTALL_BIN) ./files/shadowsocksr.switch $(1)/usr/bin/ssr-switch
 	$(INSTALL_DIR) $(1)/etc/dnsmasq.ssr
-	$(INSTALL_DATA) ./files/gfw_list.conf $(1)/etc/dnsmasq.ssr/gfw_list.conf
+	$(INSTALL_DATA) ./files/gfw-domains.china.conf $(1)/etc/dnsmasq.ssr/gfw-domains.china.conf
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_DATA) ./files/shadowsocksr.config $(1)/etc/config/shadowsocksr
 	$(INSTALL_DIR) $(1)/etc

@@ -202,7 +202,7 @@ GFW版本支持IP路由模式和GFW列表模式，需卸载原有的dnsmasq，�
    
    IP路由模式的数据文件为/etc/ignore-ips.china.conf,包含国内所有IP网段，一般很少变动，无需更新，如要更新，请在“状态”页面更新
    
-   GFW列表模式的数据文件为/etc/dnsmasq.ssr/gfw_list.conf，包含所有被墙网站，如需更新，请在“状态”页面更新
+   GFW列表模式的数据文件为/etc/dnsmasq.ssr/gfw-domains.china.conf，包含所有被墙网站，如需更新，请在“状态”页面更新
    
    如果要自定义GFW规则，在目录/etc/dnsmasq.ssr下创建一个文件，名称任取，比如myrules.conf，在文件中按要求输入你需要添加的网址，比如要添加google.com.hk，需输入如下两行：
    ```
