@@ -29,7 +29,7 @@ ShadowsocksR-libev for OpenWrt
 运行模式介绍
 ---
 【IP路由模式】
- - 所有国内IP网段不走代理，国外IP网段走代理；
+ - 所有国内IP网段不走代理，国外IP网段走代理；(china_ip_list：https://github.com/LisonFan/china_ip_list)
  - 白名单模式：缺省都走代理，列表中IP网段不走代理
 
 优点：国内外分流清晰明确；适合线路好SSR服务器，通过代理可提高访问国外网站的速度；
@@ -37,7 +37,7 @@ ShadowsocksR-libev for OpenWrt
 缺点：开启BT下载时，如连接国外的IP，会损耗SSR服务器的流量；如果SSR服务器线路不好，通过代理访问国外网站的速度不如直连
 
 【GFW列表模式】
- - 只有在GFW列表中的网站走代理；其他都不走代理；
+ - 只有在GFW列表中的网站走代理；其他都不走代理；(gfwlist：https://github.com/cokebar/gfwlist2dnsmasq)
  - 黑名单模式：缺省都不走代理，列表中网站走代理
 
 优点：目标明确，只有访问列表中网站才会损耗SSR服务器流量
@@ -54,7 +54,7 @@ ShadowsocksR-libev for OpenWrt
 
  - 从 OpenWrt 的 [SDK][S] 编译（编译环境：Ubuntu 64位系统），如果是第一次编译，还需下载OpenWrt所需依赖软件
    ```bash
-   sudo apt-get install gawk libncurses5-dev libz-dev zlib1g-dev  git ccache
+   sudo apt-get install gawk libncurses5-dev libz-dev zlib1g-dev git ccache
    ```
  
  - 下载路由器对应平台的SDK
@@ -67,7 +67,7 @@ ShadowsocksR-libev for OpenWrt
    ./scripts/feeds update packages
    ./scripts/feeds install libpcre
    # 获取 Makefile
-   git clone https://github.com/ywb94/openwrt-ssr.git package/openwrt-ssr
+   git clone https://github.com/FenghenHome/openwrt-ssr.git package/openwrt-ssr
    # 选择要编译的包 
    #luci ->3. Applications-> luci-app-shadowsocksR         原始版本
    #luci ->3. Applications-> luci-app-shadowsocksR-GFW     GFWList版本
