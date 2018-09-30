@@ -49,7 +49,7 @@ local set =luci.http.formvalue("set")
 local icount =0
 
 if set == "gfw_data" then
- refresh_cmd="wget --no-check-certificate -O /tmp/gfw-domains.china.conf https://raw.githubusercontent.com/cokebar/gfwlist2dnsmasq/gh-pages/dnsmasq_gfwlist_ipset.conf"
+ refresh_cmd="wget --no-check-certificate -O /tmp/gfw-domains.china.conf https://raw.githubusercontent.com/FenghenHome/www.114rom.com/master/openwrt/gfw-domains.china.conf"
  sret=luci.sys.call(refresh_cmd)
  icount = luci.sys.exec("cat /tmp/gfw-domains.china.conf | wc -l")
   if sret== 0 and tonumber(icount)>1000 then
@@ -65,7 +65,7 @@ if set == "gfw_data" then
   end
   luci.sys.exec("rm -f /tmp/gfw-domains.china.conf ")
 elseif set == "ip_data" then
- refresh_cmd="wget --no-check-certificate -O /tmp/ignore-ips.china.conf https://raw.githubusercontent.com/LisonFan/china_ip_list/master/china_ip_list"
+ refresh_cmd="wget --no-check-certificate -O /tmp/ignore-ips.china.conf https://raw.githubusercontent.com/FenghenHome/www.114rom.com/master/openwrt/ignore-ips.china.conf"
  sret=luci.sys.call(refresh_cmd)
  icount = luci.sys.exec("cat /tmp/ignore-ips.china.conf | wc -l")
  if sret== 0 and tonumber(icount)>1000 then
