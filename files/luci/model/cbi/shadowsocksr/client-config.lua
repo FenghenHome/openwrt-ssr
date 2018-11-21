@@ -20,6 +20,8 @@ end
 
 
 local server_table = {}
+-- change for openwrt 18.06.1
+--local arp_table = luci.sys.net.arptable() or {}
 local arp_table = luci.ip.neighbors() or {}
 local encrypt_methods = {
 	"none",
