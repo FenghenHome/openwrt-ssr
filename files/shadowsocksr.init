@@ -39,11 +39,7 @@ uci_get_by_type() {
 	echo ${ret:=$3}
 }
 
-valid_ip6()
-{
-	result=$(echo "$1" | sed -n "s/\(\([0-9a-fA-F]\{1,4\}:\)\{7,7\}[0-9a-fA-F]\{1,4\}\|\([0-9a-fA-F]\{1,4\}:\)\{1,7\}:\|\([0-9a-fA-F]\{1,4\}:\)\{1,6\}:[
-	echo "$result"
-}
+
 
 gen_config_file() {
          local host=$(uci_get_by_name $1 server)
@@ -236,8 +232,6 @@ start_redir() {
     local password=$(uci_get_by_name $GLOBAL_SERVER kcp_password)
     local kcp_param=$(uci_get_by_name $GLOBAL_SERVER kcp_param)
     [ "$password" != "" ] && password="--key "${password}
-    local ip6server=$(valid_ip6 "$kcp_server")
-    [ "$ip6server" != "" ] && kcp_server="[$ip6server]"
     service_start /usr/bin/ssr-kcptun -r $kcp_server:$kcp_port -l :$server_port  $password $kcp_param 
     kcp_enable_flag=1
 	fi
