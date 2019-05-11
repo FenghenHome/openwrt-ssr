@@ -51,8 +51,9 @@ local icount =0
 if set == "gfw_data" then
  refresh_cmd="wget --no-check-certificate -O /tmp/gfw-domains.china.conf https://raw.githubusercontent.com/FenghenHome/www.114rom.com/master/openwrt/dnsmasq.gfw-domains.conf"
  sret=luci.sys.call(refresh_cmd)
+ if sret== 0 then
  icount = luci.sys.exec("cat /tmp/gfw-domains.china.conf | wc -l")
-  if sret== 0 and tonumber(icount)>1000 then
+  if tonumber(icount)>1000 then
    oldcount=luci.sys.exec("cat /etc/dnsmasq.ssr/gfw-domains.china.conf | wc -l")
    if tonumber(icount) ~= tonumber(oldcount) then
     luci.sys.exec("cp -f /tmp/gfw-domains.china.conf /etc/dnsmasq.ssr/gfw-domains.china.conf")
@@ -64,6 +65,9 @@ if set == "gfw_data" then
    retstring ="-1"  
   end
   luci.sys.exec("rm -f /tmp/gfw-domains.china.conf ")
+ else
+  retstring ="-1"
+ end
 elseif set == "ip_data" then
  refresh_cmd="wget --no-check-certificate -O /tmp/ignore-ips.china.conf https://raw.githubusercontent.com/FenghenHome/www.114rom.com/master/openwrt/ignore-ips.china.conf"
  sret=luci.sys.call(refresh_cmd)
@@ -83,8 +87,9 @@ elseif set == "ip_data" then
 else
  refresh_cmd="wget --no-check-certificate -O /tmp/adblock-domains.china.conf https://raw.githubusercontent.com/FenghenHome/www.114rom.com/master/openwrt/dnsmasq.adblock-domains.conf"
  sret=luci.sys.call(refresh_cmd)
+ if sret== 0 then
  icount = luci.sys.exec("cat /tmp/adblock-domains.china.conf | wc -l")
-  if sret== 0 and tonumber(icount)>1000 then
+  if tonumber(icount)>1000 then
    if nixio.fs.access("/etc/dnsmasq.ssr/adblock-domains.china.conf") then
     oldcount=luci.sys.exec("cat /etc/dnsmasq.ssr/adblock-domains.china.conf | wc -l")
    else
@@ -104,6 +109,9 @@ else
    retstring ="-1"  
   end
   luci.sys.exec("rm -f /tmp/adblock-domains.china.conf ")
+ else
+  retstring ="-1"
+ end
 end	
 luci.http.prepare_content("application/json")
 luci.http.write_json({ ret=retstring ,retcount=icount})
